@@ -17,13 +17,13 @@ namespace ApiPeliculas.Repositorio
         public bool ActualizarCategoria(Categoria categoria)
         {
            categoria.FechaCreacion = DateTime.Now;
-            _bd.Categoria.Update(categoria); 
+            _bd.Categorias.Update(categoria); 
             return Guardar();
         }
 
         public bool BorrarCategoria(Categoria categoria)
         {
-            _bd.Categoria.Remove(categoria);
+            _bd.Categorias.Remove(categoria);
             return Guardar();
 
         }
@@ -31,19 +31,19 @@ namespace ApiPeliculas.Repositorio
         public bool CrearCategoria(Categoria categoria)
         {
             categoria.FechaCreacion = DateTime.Now;
-            _bd.Categoria.Add(categoria);
+            _bd.Categorias.Add(categoria);
             return Guardar();
         }
 
         public bool ExisteCategoria(int id)
         {
 
-            return _bd.Categoria.Any(c => c.Id == id);
+            return _bd.Categorias.Any(c => c.Id == id);
         }
 
         public bool ExisteCategoria(string nombre)
         {
-            bool valor = _bd.Categoria.Any(c => c.Nombre.ToLower().Trim() == nombre.ToLower().Trim());
+            bool valor = _bd.Categorias.Any(c => c.Nombre.ToLower().Trim() == nombre.ToLower().Trim());
             return valor;
         }
 
@@ -51,13 +51,13 @@ namespace ApiPeliculas.Repositorio
         {
 
 
-            return _bd.Categoria.FirstOrDefault(c => c.Id == CategoriaId);
+            return _bd.Categorias.FirstOrDefault(c => c.Id == CategoriaId);
            
         }
 
         public ICollection<Categoria> GetCategorias()
         {
-            return _bd.Categoria.OrderBy(c => c.Nombre).ToList();
+            return _bd.Categorias.OrderBy(c => c.Nombre).ToList();
         }
 
         public bool Guardar()

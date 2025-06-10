@@ -7,7 +7,7 @@ namespace ApiPeliculas.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options):base(options) { }
         // Aqui se van agregar las entidades  (Modelos)
-        public DbSet<Categoria> Categoria { get; set; }    
+        public DbSet<Categoria> Categorias { get; set; }    
 
 
     }
