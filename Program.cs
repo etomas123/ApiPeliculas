@@ -14,6 +14,8 @@ builder.Services.AddControllers();
 
 //Agregamos los repositorios
 builder.Services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
+builder.Services.AddScoped<IPeliculaRepositorio, PeliculaRepositorio>();
+
 //agregamos el automapper
 builder.Services.AddAutoMapper(typeof(PeliculasMapper));
 

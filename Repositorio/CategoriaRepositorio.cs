@@ -16,8 +16,13 @@ namespace ApiPeliculas.Repositorio
 
         public bool ActualizarCategoria(Categoria categoria)
         {
-           categoria.FechaCreacion = DateTime.Now;
-            _bd.Categorias.Update(categoria); 
+           categoria.FechaCreacion = DateTime.UtcNow;
+            var categoriaExistentes = _bd.Categorias.Find(categoria.Id);
+            if (categoriaExistentes != null) { _bd.Entry(categoriaExistentes).CurrentValues.SetValues(categoria); }
+            else {
+                _bd.Categorias.Update(categoria);
+            }
+               
             return Guardar();
         }
 
@@ -30,7 +35,7 @@ namespace ApiPeliculas.Repositorio
 
         public bool CrearCategoria(Categoria categoria)
         {
-            categoria.FechaCreacion = DateTime.Now;
+            categoria.FechaCreacion = DateTime.UtcNow;
             _bd.Categorias.Add(categoria);
             return Guardar();
         }
