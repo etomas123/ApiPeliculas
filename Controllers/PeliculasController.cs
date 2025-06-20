@@ -306,8 +306,21 @@ namespace ApiPeliculas.Controllers
         public IActionResult Buscar(string nombre)
         {
             try {
-            
-            
+                var resultado = _pelRepo.BuscarPelicula(nombre);
+                if (resultado.Any()) {
+                    return Ok(new
+                    {
+                        StatusCode = 200,
+                        message = "Películas obtenidas con éxito",
+                        data = resultado,
+                    });
+                }
+                return NotFound(new
+                {
+                    StatusCode = 404,
+                    message = $"No se encontro ninguna pelicula",
+                });
+
             } catch (Exception e) {
                 
                 
@@ -318,28 +331,6 @@ namespace ApiPeliculas.Controllers
                 });
 
             }
-            /*var listaPeliculas = _pelRepo.GetPeliculasEnCategoria(categoriaId);
-            if (!listaPeliculas.Any())
-            {
-                return NotFound(new
-                {
-                    StatusCode = 404,
-                    message = $"No existen películas en la categoría con id {categoriaId}",
-                });
-            }
-
-            var listaPeliculasDto = new List<PeliculaDto>();
-            foreach (var pelicula in listaPeliculas)
-            {
-                listaPeliculasDto.Add(_mapper.Map<PeliculaDto>(pelicula));
-            }
-
-            return Ok(new
-            {
-                StatusCode = 200,
-                message = "Películas obtenidas con éxito",
-                data = listaPeliculasDto,
-            });*/
         }
 
 
